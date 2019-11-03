@@ -18,7 +18,7 @@
         static async Task Main(string[] args)
         {
             string region = args[0];
-            string connectionString = File.ReadAllText("CONNSTRING");
+            string connectionString = File.ReadAllText("CONNSTRING").Trim();
 
             MongoClient mongoClient = new MongoClient($"{connectionString}{region}");
             IMongoDatabase database = mongoClient.GetDatabase(Program.DatabaseString);
