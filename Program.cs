@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using MongoDB.Bson;
@@ -14,6 +15,7 @@
         private const string CollectionString = "items";
         private static string[] colors = new[] { "red", "orange", "yellow", "green", "blue", "indigo", "violet" };
         private static string[] animals = new[] { "cat", "dog", "llama", "hedgehog", "fish" };
+        private static string[] tags = new[] { "new", "sale", "fragile", "rare" };
 
         static async Task Main(string[] args)
         {
@@ -41,7 +43,8 @@
         {
             string color = Program.colors[(int)Math.Log10(random.Next(1, (int)Math.Pow(10, Program.colors.Length)))];
             string animal = Program.animals[(int)Math.Log10(random.Next(1, (int)Math.Pow(10, Program.animals.Length)))];
-            return BsonDocument.Parse($"{{session:\"{session}\",index:{index},region:\"{region}\",color:\"{color}\",animal:\"{animal}\",a:{random.Next(1, 10)},b:{random.Next(1, 100)},c:{random.Next(1, 1000)},d:{random.Next(1, 10000)},e:{random.Next(1, 100000)}}}");
+            string tagsArray = "[" + string.Join(",", Program.tags.Take(random.Next(0, Program.tags.Length)).Select(x => $"\"{x}\"")) + "]";
+            return BsonDocument.Parse($"{{session:\"{session}\",index:{index},region:\"{region}\",color:\"{color}\",animal:\"{animal}\",tags:{tagsArray}, a:{random.Next(1, 10)},b:{random.Next(1, 100)},c:{random.Next(1, 1000)},d:{random.Next(1, 10000)},e:{random.Next(1, 100000)}}}");
         }
     }
 }
