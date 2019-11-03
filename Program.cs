@@ -32,7 +32,7 @@
             while (true)
             {
                 stopwatch.Restart();
-                await collection.InsertOneAsync(Program.GetDocument(random, region, session, index));
+                await collection.InsertOneAsync(Program.GetDocument(random, region, session, index++));
                 Console.WriteLine(stopwatch.ElapsedMilliseconds);
             }
         }
