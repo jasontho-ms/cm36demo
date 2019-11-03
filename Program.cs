@@ -33,7 +33,7 @@
             {
                 stopwatch.Restart();
                 await collection.InsertOneAsync(Program.GetDocument(random, region, session, index++));
-                Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                Console.WriteLine($"Wrote document {index} to {region} in {stopwatch.ElapsedMilliseconds} ms.");
             }
         }
 
